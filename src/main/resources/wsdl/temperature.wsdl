@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://example.com/temperature"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://example.com/temperature"
+             name="TemperatureService">
+
+    <!-- Import XSD types -->
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://example.com/temperature" schemaLocation="../schema/temperature.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <!-- Messages -->
+    <message name="CelsiusToFahrenheitRequestMessage">
+        <part name="parameters" element="tns:CelsiusToFahrenheitRequest"/>
+    </message>
+
+    <message name="CelsiusToFahrenheitResponseMessage">
+        <part name="parameters" element="tns:CelsiusToFahrenheitResponse"/>
+    </message>
+
+    <!-- Port Type (Interface / Methods) -->
+    <portType name="TemperaturePortType">
+        <operation name="CelsiusToFahrenheit">
+            <input message="tns:CelsiusToFahrenheitRequestMessage"/>
+            <output message="tns:CelsiusToFahrenheitResponseMessage"/>
+        </operation>
+    </portType>
+
+    <!-- Binding (SOAP protocol details) -->
+    <binding name="TemperatureBinding" type="tns:TemperaturePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CelsiusToFahrenheit">
+            <soap:operation soapAction="CelsiusToFahrenheit"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <!-- Service & Endpoint -->
+    <service name="TemperatureService">
+        <port name="TemperaturePort" binding="tns:TemperatureBinding">
+            <soap:address location="http://localhost:8080/ws/temperature"/>
+        </port>
+    </service>
+</definitions>

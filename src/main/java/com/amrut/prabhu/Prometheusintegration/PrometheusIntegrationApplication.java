@@ -18,8 +18,16 @@ public class PrometheusIntegrationApplication {
         SpringApplication.run(PrometheusIntegrationApplication.class, args);
     }
 
+    private final TemperatureLogService temperatureLogService;
+
+    public PrometheusIntegrationApplication(TemperatureLogService temperatureLogService) {
+        this.temperatureLogService = temperatureLogService;
+    }
+
     @GetMapping("/something")
     public ResponseEntity<String> createLogs() {
+
+        temperatureLogService.createLogs();
         logger.warn("Just checking");
         return ResponseEntity.ok().body("All Ok");
     }

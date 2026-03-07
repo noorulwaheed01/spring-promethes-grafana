@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://example.com/temperature"
+            xmlns="http://example.com/temperature"
+            elementFormDefault="qualified">
+
+    <!-- Request type -->
+    <xsd:element name="CelsiusToFahrenheitRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="celsius" type="xsd:double"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Response type -->
+    <xsd:element name="CelsiusToFahrenheitResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="fahrenheit" type="xsd:double"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>
